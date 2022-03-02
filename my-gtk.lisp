@@ -1,7 +1,13 @@
 ; (push #P"/home/p-hasan/src/lisp/my-gtk/" asdf:*central-registry*)
 ; (require "my-gtk")
 
-(in-package #:my-gtk) 
+(in-package #:my-gtk)
+
+
+(defmacro gtk-run (&rest body)
+  `(sb-int:with-float-traps-masked
+       (:divide-by-zero)
+     ,@body))
 
 (defun example-scale-widgets ()
   (within-main-loop
